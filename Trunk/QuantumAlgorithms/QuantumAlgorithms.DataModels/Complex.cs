@@ -74,8 +74,8 @@ namespace QuantumAlgorithms.DataModels
 
         public static Complex operator *(Complex a, Complex b)
         {
-            var real = a.Real * b.Imaginary - b.Real * a.Imaginary;
-            var imaginary = a.Real * b.Imaginary + b.Real + a.Imaginary;
+            var real = a.Real * b.Real - a.Imaginary * b.Imaginary;
+            var imaginary = a.Real * b.Imaginary + a.Imaginary * b.Real;
             return new Complex(real, imaginary);
         }
 

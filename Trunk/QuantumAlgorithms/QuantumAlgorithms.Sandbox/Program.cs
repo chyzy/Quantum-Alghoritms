@@ -11,11 +11,11 @@ namespace QuantumAlgorithms.Sandbox
     {
         static void Main(string[] args)
         {
-            var a = new Complex(0, 3);
+            var a = new Complex(0,1);
 
-            var b = new Complex(a.Module, a.Alpha, true);
+            var b = a ^ 3;
 
-            Console.WriteLine(a.ToString(true));
+            Console.WriteLine(b);
 
             Console.ReadKey();
         }
