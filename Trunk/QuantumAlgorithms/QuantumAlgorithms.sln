@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantumAlgorithms.DataModel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantumAlgorithms.Sandbox", "QuantumAlgorithms.Sandbox\QuantumAlgorithms.Sandbox.csproj", "{46351E4A-DFDC-4AB4-A026-237BF29BFF6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantumAlghoritms.DataModels.Tests", "QuantumAlghoritms.DataModels.Tests\QuantumAlghoritms.DataModels.Tests.csproj", "{6772A5D7-EC7D-41EA-8875-1598EE2D3646}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{46351E4A-DFDC-4AB4-A026-237BF29BFF6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46351E4A-DFDC-4AB4-A026-237BF29BFF6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46351E4A-DFDC-4AB4-A026-237BF29BFF6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6772A5D7-EC7D-41EA-8875-1598EE2D3646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6772A5D7-EC7D-41EA-8875-1598EE2D3646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6772A5D7-EC7D-41EA-8875-1598EE2D3646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6772A5D7-EC7D-41EA-8875-1598EE2D3646}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

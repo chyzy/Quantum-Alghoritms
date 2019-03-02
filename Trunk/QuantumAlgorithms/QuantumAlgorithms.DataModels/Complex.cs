@@ -61,8 +61,11 @@ namespace QuantumAlgorithms.DataModels
         {
             get
             {
-                return Math.Asin(_imaginary / Module);
-            }
+                var result = Math.Atan2(_imaginary, _real);
+                return result >= 0 ?
+                    result :
+                    Math.PI * 2 + result;
+            } 
         }
 
         /// <summary>
@@ -166,8 +169,8 @@ namespace QuantumAlgorithms.DataModels
         public override string ToString()
         {
             return _imaginary >= 0 ?
-                $"{Real}+{Imaginary}i" :
-                $"{Real}{Imaginary}i";
+                $"{_real}+{_imaginary}i" :
+                $"{_real}{_imaginary}i";
         }
 
         public string ToString(bool inTrigonometric)

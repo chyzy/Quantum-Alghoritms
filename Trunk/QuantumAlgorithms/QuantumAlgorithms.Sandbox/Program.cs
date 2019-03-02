@@ -8,18 +8,12 @@ using QuantumAlgorithms.DataModels;
 namespace QuantumAlgorithms.Sandbox
 {
     class Program
-    {
+    {        
         static void Main(string[] args)
         {
-            var a = new Complex(0,2);
+            var a = new Complex(1, Math.PI/2,true);
 
-            var b = a ^ 3;
-
-            var c = a * a *a;
-
-            Console.WriteLine(b == c);
-
-            Console.WriteLine(b);
+            Console.WriteLine(a^3);
 
             Console.ReadKey();
         }
