@@ -15,7 +15,7 @@ namespace QuantumAlgorithms.DataModels
         private readonly double _imaginary;
         private static readonly int _precision = 3;
 
-        /// <summary>
+        /// <summary>s
         /// Creates an instance of <see cref="Complex"/>.
         /// </summary>
         /// <param name="real">Real part.</param>
