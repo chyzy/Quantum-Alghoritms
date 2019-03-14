@@ -11,15 +11,22 @@ namespace QuantumAlgorithms.DataModels
     {
         public List<Complex> Complex;
 
+        /// <summary>
+        /// Creates an instance of <see cref="Vector"/>.
+        /// </summary>
+        /// <param name="complex">Components.</param>
         public Vector(IEnumerable<Complex> complex)
         {
             Complex = complex.ToList();
         }
 
+        /// <summary>
+        /// Adds two <see cref="Vector"/>s.
+        /// </summary>
         public static Vector operator + (Vector a, Vector b)
         {
             if(a.Complex.Count()!= b.Complex.Count())
-                throw new Exception("Waktory muszą być tego samego wymiaru!");
+                throw new Exception("Vectors must be the same size!");
 
             var args = new List<Complex>();
 
@@ -31,10 +38,13 @@ namespace QuantumAlgorithms.DataModels
             return new Vector(args);
         }
 
+        /// <summary>
+        /// Subtract two <see cref="Vector"/>s.
+        /// </summary>
         public static Vector operator - (Vector a, Vector b)
         {
             if (a.Complex.Count() != b.Complex.Count())
-                throw new Exception("Waktory muszą być tego samego wymiaru!");
+                throw new Exception("Vectors must be the same size!");
 
             var args = new List<Complex>();
 
@@ -46,6 +56,9 @@ namespace QuantumAlgorithms.DataModels
             return new Vector(args);
         }
 
+        /// <summary>
+        /// Multiplies two <see cref="Vector"/>s.
+        /// </summary>
         public static Vector operator * (Vector a, Complex b)
         {        
             var args = new List<Complex>();
@@ -58,10 +71,13 @@ namespace QuantumAlgorithms.DataModels
             return new Vector(args);
         }
 
+        /// <summary>
+        /// Scalar multiplication of two <see cref="Vector"/>s.
+        /// </summary>
         public static Complex operator | (Vector a, Vector b)
         {
-            if (a.Complex.Count() != b.Complex.Count())
-                throw new Exception("Wektory muszą być tego samego wymiaru!");
+            if (a.Complex.Count != b.Complex.Count)
+                throw new Exception("Vectors must be the same size!");
 
             var result = new Complex(0,0);
 
@@ -72,14 +88,38 @@ namespace QuantumAlgorithms.DataModels
             return result;
         }
 
-        public double Length()
+        public static bool operator == (Vector a, Vector b)
         {
-            var scalar = this | this;
-            if(scalar.Imaginary!=0)
-                throw new Exception("Cześć urojona jest różna od 0");
-            return Math.Sqrt(scalar.Real);
+            if (a.Complex.Count != b.Complex.Count)
+                return false;
+
+            var result = true;
+
+            for (int i = 0; i < a.Complex.Count; i++)
+            {
+                result &= a.Complex[i] == b.Complex[i];
+            }
+
+            return result;
         }
 
+        public static bool operator != (Vector a, Vector b)
+        {
+            return !(a == b);
+        }
 
+        /// <summary>
+        /// An absolute length of the <see cref="Vector"/>.
+        /// </summary>       
+        public double Length
+        {
+            get
+            {
+                var scalar = this | this;
+                if (Math.Abs(scalar.Imaginary) > Constants.PrecisionTolerance)
+                    throw new Exception("An imaginary part is not equal 0");
+                return Math.Sqrt(scalar.Real);
+            }
+        }      
     }
 }

@@ -10,9 +10,7 @@ namespace QuantumAlghoritms.DataModels.Tests
 {
     [TestClass]
     public class CompexNumbersTests
-    {
-        private static double _precison = 0.01d;
-
+    {        
         [TestMethod]
         public void CreatingComplexNumberByValue()
         {
@@ -24,7 +22,7 @@ namespace QuantumAlghoritms.DataModels.Tests
 
                 var complex = new Complex(re, im);
 
-                Assert.IsTrue(Math.Abs(complex.Real - re) < _precison && Math.Abs(complex.Imaginary - im) < _precison);
+                Assert.IsTrue(Math.Abs(complex.Real - re) < Constants.PrecisionTolerance && Math.Abs(complex.Imaginary - im) < Constants.PrecisionTolerance);
             }
         }
 
@@ -39,8 +37,8 @@ namespace QuantumAlghoritms.DataModels.Tests
 
                 var complex = new Complex(module, angle, true);
 
-                Assert.IsTrue(Math.Abs(complex.Module - module) < _precison &&
-                              Math.Abs(complex.Alpha - angle) < _precison);
+                Assert.IsTrue(Math.Abs(complex.Module - module) < Constants.PrecisionTolerance &&
+                              Math.Abs(complex.Alpha - angle) < Constants.PrecisionTolerance);
             }
         }
 
@@ -96,8 +94,8 @@ namespace QuantumAlghoritms.DataModels.Tests
 
                 var sum = a + b;
 
-                Assert.IsTrue(Math.Abs(re1 + re2 - sum.Real) <= _precison &&
-                              Math.Abs(im1 + im2 - sum.Imaginary) <= _precison);
+                Assert.IsTrue(Math.Abs(re1 + re2 - sum.Real) <= Constants.PrecisionTolerance &&
+                              Math.Abs(im1 + im2 - sum.Imaginary) <= Constants.PrecisionTolerance);
             }
         }
 
@@ -129,8 +127,8 @@ namespace QuantumAlghoritms.DataModels.Tests
 
                 var diff = a - b;
 
-                Assert.IsTrue(Math.Abs(re1 - re2 - diff.Real) <= _precison &&
-                              Math.Abs(im1 - im2 - diff.Imaginary) <= _precison);
+                Assert.IsTrue(Math.Abs(re1 - re2 - diff.Real) <= Constants.PrecisionTolerance &&
+                              Math.Abs(im1 - im2 - diff.Imaginary) <= Constants.PrecisionTolerance);
             }
         }
 
@@ -146,7 +144,7 @@ namespace QuantumAlghoritms.DataModels.Tests
                 var a = new Complex(re,im);              
                 var b = a + a.Conjugate;
 
-                Assert.IsTrue(Math.Abs(b.Real - re*2) < _precison && Math.Abs(b.Imaginary) < _precison );
+                Assert.IsTrue(Math.Abs(b.Real - re*2) < Constants.PrecisionTolerance && Math.Abs(b.Imaginary) < Constants.PrecisionTolerance);
             }
         }
     }

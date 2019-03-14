@@ -12,8 +12,7 @@ namespace QuantumAlgorithms.DataModels
     public class Complex : IEquatable<Complex>
     {
         private readonly double _real;
-        private readonly double _imaginary;
-        private static readonly int _precision = 3;
+        private readonly double _imaginary;        
 
         /// <summary>s
         /// Creates an instance of <see cref="Complex"/>.
@@ -33,9 +32,9 @@ namespace QuantumAlgorithms.DataModels
         /// <param name="alpha">Complex number's alpha angle.</param>
         /// <param name="isTrigonometric"></param>
         public Complex(double module, double alpha, bool isTrigonometric)
-        {
-            _real = Math.Round(module * Math.Cos(alpha), _precision);
-            _imaginary = Math.Round(module * Math.Sin(alpha), _precision);
+        {           
+            _real = Math.Round(module * Math.Cos(alpha), Constants.PrecisonDigits);
+            _imaginary = Math.Round(module * Math.Sin(alpha), Constants.PrecisonDigits);
         }
 
         /// <summary>
@@ -185,7 +184,7 @@ namespace QuantumAlgorithms.DataModels
 
         public bool Equals(Complex other)
         {
-            return this.Real == other.Real && this.Imaginary == other.Imaginary;
+            return (this.Real - other?.Real) < Constants.PrecisionTolerance && Math.Abs(this.Imaginary - other.Imaginary) < Constants.PrecisionTolerance;
         }
 
         public override bool Equals(object obj)
