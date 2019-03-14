@@ -9,7 +9,7 @@ namespace QuantumAlgorithms.DataModels
 {
     public class Vector
     {
-        public List<Complex> Complex;
+        public List<Complex> Complex { get; protected set; }
 
         /// <summary>
         /// Creates an instance of <see cref="Vector"/>.
@@ -18,6 +18,11 @@ namespace QuantumAlgorithms.DataModels
         public Vector(IEnumerable<Complex> complex)
         {
             Complex = complex.ToList();
+        }
+
+        public Vector(params Complex[] complex)
+        {
+            this.Complex = complex.ToList();
         }
 
         /// <summary>
@@ -88,6 +93,9 @@ namespace QuantumAlgorithms.DataModels
             return result;
         }
 
+        /// <summary>
+        /// Checks if given <see cref="Vector"/>s are equal.
+        /// </summary>
         public static bool operator == (Vector a, Vector b)
         {
             if (a.Complex.Count != b.Complex.Count)
@@ -103,6 +111,9 @@ namespace QuantumAlgorithms.DataModels
             return result;
         }
 
+        /// <summary>
+        /// Checks if given <see cref="Vector"/>s are equal.
+        /// </summary>
         public static bool operator != (Vector a, Vector b)
         {
             return !(a == b);

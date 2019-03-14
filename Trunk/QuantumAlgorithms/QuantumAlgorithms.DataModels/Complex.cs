@@ -87,6 +87,15 @@ namespace QuantumAlgorithms.DataModels
         }
 
         /// <summary>
+        /// Converts <see cref="Double"/> into <see cref="Complex"/>.
+        /// </summary>
+        /// <param name="real">The real part.</param>
+        public static implicit operator Complex(double real)
+        {
+            return new Complex(real,0);
+        }
+
+        /// <summary>
         /// Adds two <see cref="Complex"/> numbers.
         /// </summary>
         /// <param name="a">Term.</param>
@@ -95,6 +104,15 @@ namespace QuantumAlgorithms.DataModels
         public static Complex operator + (Complex a, Complex b)
         {
             return new Complex(a.Real + b.Real, a.Imaginary + b.Imaginary);
+        }
+
+        /// <summary>
+        /// Reverse the <see cref="Complex"/> number.
+        /// </summary>
+        /// <param name="complex"><see cref="Complex"/> numbers.</param>
+        public static Complex operator -(Complex complex)
+        {
+            return new Complex(-complex.Real,-complex.Imaginary);
         }
 
         /// <summary>
@@ -167,6 +185,9 @@ namespace QuantumAlgorithms.DataModels
 
         public override string ToString()
         {
+            if (Math.Abs(_imaginary) < Constants.PrecisionTolerance)
+                return $"{_real}";
+
             return _imaginary >= 0 ?
                 $"{_real}+{_imaginary}i" :
                 $"{_real}{_imaginary}i";
