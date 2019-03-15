@@ -62,22 +62,22 @@ namespace QuantumAlgorithms.DataModels
         }
 
         /// <summary>
-        /// Multiplies two <see cref="Vector"/>s.
-        /// </summary>
-        public static Vector operator * (Vector a, Complex b)
+        /// Scalar multiplication of two <see cref="Vector"/>s.
+        /// </summary>        
+        public static Vector operator * (Complex scalar, Vector vector)
         {        
             var args = new List<Complex>();
 
-            for (int i = 0; i < a.Complex.Count(); i++)
+            for (int i = 0; i < vector.Complex.Count(); i++)
             {
-                args.Add(a.Complex[i] * b );
+                args.Add(vector.Complex[i] * scalar );
             }
 
             return new Vector(args);
         }
 
         /// <summary>
-        /// Scalar multiplication of two <see cref="Vector"/>s.
+        /// Multiplies two <see cref="Vector"/>s.
         /// </summary>
         public static Complex operator | (Vector a, Vector b)
         {
