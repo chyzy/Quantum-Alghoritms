@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuantumAlgorithms.DataModels
 {
+
     public class Qubit : Vector
     {
         public Qubit(Complex alpha, Complex beta) : base(alpha,beta)
@@ -13,16 +14,13 @@ namespace QuantumAlgorithms.DataModels
             
         }
 
-        public static Qubit Random(int? min = null, int? max = null)
+        public static Qubit Random()
         {
-            if (min == null)
-                min = 200;
-            if (max == null)
-                max = 200;            
+            var random  = new Random();
 
-            var random = new Random();
-            var alpha = new Complex(random.Next(min.Value, max.Value), random.Next(min.Value, max.Value));
-            var beta = new Complex(random.Next(min.Value, max.Value), random.Next(min.Value, max.Value));
+            var alpha = random.NextDouble();
+
+            var beta = Math.Sqrt(1 - Math.Pow(alpha,2));
 
             return new Qubit(alpha,beta);
         }

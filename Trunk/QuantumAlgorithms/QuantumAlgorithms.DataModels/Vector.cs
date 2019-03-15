@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuantumAlgorithms.DataModels
 {
-    public class Vector
+    public class Vector : IEquatable<Vector>
     {
         public List<Complex> Complex { get; protected set; }
 
@@ -131,6 +131,30 @@ namespace QuantumAlgorithms.DataModels
                     throw new Exception("An imaginary part is not equal 0");
                 return Math.Sqrt(scalar.Real);
             }
-        }      
+        }
+
+        #region IEquatable
+
+        public bool Equals(Vector other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Equals(Complex, other.Complex);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Vector)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (Complex != null ? Complex.GetHashCode() : 0);
+        }
+
+        #endregion
     }
 }

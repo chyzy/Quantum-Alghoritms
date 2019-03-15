@@ -10,12 +10,13 @@ namespace QuantumAlgorithms.Sandbox
     class Program
     {                
         static void Main(string[] args)
-        {                    
-            var pauliX = new QuantumGate(new Matrix(new Complex[,]{{0,1},{1,0}}));
+        {
+            var array = new Complex[,] {{0, 1}, {1, 0}};
+            var mx = new Matrix(array);
 
-            var qubit = new Qubit(0,1);
+            var qubit = Qubit.Random();
 
-            Console.WriteLine(qubit | pauliX);
+            Console.WriteLine(qubit | mx);
 
             Console.ReadKey();
         }

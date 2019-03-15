@@ -14,5 +14,10 @@ namespace QuantumAlgorithms.DataModels
         }
 
         public Matrix Matrix { get; protected set; }
+
+        public static implicit operator QuantumGate(Matrix matrix)
+        {
+            return new QuantumGate(matrix);
+        }
     }
 }

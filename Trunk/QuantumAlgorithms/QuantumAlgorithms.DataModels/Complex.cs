@@ -183,6 +183,9 @@ namespace QuantumAlgorithms.DataModels
             return !a.Equals(b);
         }
 
+        /// <summary>
+        /// Stringify the <see cref="Complex"/>.
+        /// </summary>       
         public override string ToString()
         {
             if (Math.Abs(_imaginary) < Constants.PrecisionTolerance)
@@ -193,6 +196,10 @@ namespace QuantumAlgorithms.DataModels
                 $"{_real}{_imaginary}i";
         }
 
+        /// <summary>
+        /// Stringify the <see cref="Complex"/>.
+        /// <param name="inTrigonometric">Display in trigonometric form.</param>
+        /// </summary>   
         public string ToString(bool inTrigonometric)
         {
             if (!inTrigonometric)
@@ -202,6 +209,8 @@ namespace QuantumAlgorithms.DataModels
                 : $"{this.Module}*(cos {this.Alpha} - isin {Math.Abs(this.Alpha)})";
 
         }
+
+        #region IEquatable
 
         public bool Equals(Complex other)
         {
@@ -221,5 +230,7 @@ namespace QuantumAlgorithms.DataModels
             hashCode = hashCode * -1521134295 + Imaginary.GetHashCode();
             return hashCode;
         }
+
+        #endregion
     }
 }
