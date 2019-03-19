@@ -14,7 +14,22 @@ namespace QuantumAlgorithms.DataModels
             this._data = matrix;
         }
 
-        private Complex[,] _data;
+        public Matrix(Matrix matrix) : this(matrix.To2DArray())
+        {
+            
+        }
+
+        protected Matrix(params Complex[] complexSet)
+        {
+            this._data = new Complex[complexSet.Length,1];
+
+            for (int i = 0; i < complexSet.Length; i++)
+            {
+                _data[i, 0] = complexSet[i];
+            }
+        }
+        
+        protected Complex[,] _data;
 
         public int N => _data.GetUpperBound(0) + 1;
         public int M => _data.GetUpperBound(1) + 1;
@@ -75,6 +90,20 @@ namespace QuantumAlgorithms.DataModels
             return new Matrix(matrix);
         }
 
+        public static Matrix operator * (Complex scalar, Matrix matrix)
+        {
+            var result = new Matrix(matrix.To2DArray());
+            for (int n = 0; n < matrix.N; n++)
+            {
+                for (int m = 0; m < matrix.M; m++)
+                {
+                    result[n, m] = scalar * matrix[n, m];
+                }
+            }
+
+            return result;
+        }
+
         public static Matrix operator + (Matrix a, Matrix b)
         {
             if (a.M != b.M || a.N != b.N)
@@ -111,7 +140,42 @@ namespace QuantumAlgorithms.DataModels
 
         public static Matrix operator - (Matrix a, Matrix b)
         {
-            return a + (-b);
+            return (-1 * b) + a;
+        }
+
+        public static bool operator == (Matrix a, Matrix b)
+        {
+            if (a.N != b.N || a.M != b.M)
+                return false;
+            
+            for (int n = 0; n < a.N; n++)
+            {
+                for (int m = 0; m < a.M; m++)
+                {
+                    if (a[n, m] != b[n, m])
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool operator !=(Matrix a, Matrix b)
+        {
+            return !(a == b);
+        }
+
+        public virtual Complex[,] To2DArray()
+        {
+            var result = new Complex[N,M];
+            for (int n = 0; n < N; n++)
+            {
+                for (int m = 0; m < M; m++)
+                {
+                    result[n, m] = this[n, m];
+                }
+            }
+
+            return result;
         }
 
         public override string ToString()

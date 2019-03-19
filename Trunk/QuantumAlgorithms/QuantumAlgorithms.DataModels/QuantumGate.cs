@@ -6,18 +6,11 @@ using System.Threading.Tasks;
 
 namespace QuantumAlgorithms.DataModels
 {
-    public class QuantumGate
+    public class QuantumGate : Matrix
     {       
-        public QuantumGate(Matrix matrix)
+        public QuantumGate(Matrix matrix) : base(matrix.To2DArray())
         {
-            this.Matrix = matrix;
-        }
-
-        public Matrix Matrix { get; protected set; }
-
-        public static implicit operator QuantumGate(Matrix matrix)
-        {
-            return new QuantumGate(matrix);
+           
         }
     }
 }

@@ -1,28 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace QuantumAlgorithms.DataModels
 {
-    public class Vector : IEquatable<Vector>
+    public class Vector : Matrix, IEquatable<Vector>
     {
-        public List<Complex> Complex { get; protected set; }
+        
 
         /// <summary>
         /// Creates an instance of <see cref="Vector"/>.
         /// </summary>
         /// <param name="complex">Components.</param>
-        public Vector(IEnumerable<Complex> complex)
-        {
-            Complex = complex.ToList();
+        public Vector(IEnumerable<Complex> complex) : base(complex.ToArray())
+        {          
         }
 
-        public Vector(params Complex[] complex)
+        public Vector(params Complex[] complex) : base(complex)
+        {            
+        }
+
+        public Vector(Matrix matrix) : base(matrix.To2DArray())
         {
-            this.Complex = complex.ToList();
+            
+        }
+
+        public Complex this[int row]
+        {
+            get { return this[row, 0]; }
+            set { this[row, 0] = value; }
         }
 
         /// <summary>
@@ -30,17 +40,12 @@ namespace QuantumAlgorithms.DataModels
         /// </summary>
         public static Vector operator + (Vector a, Vector b)
         {
-            if(a.Complex.Count()!= b.Complex.Count())
-                throw new Exception("Vectors must be the same size!");
+            if(a.N!= b.N)
+                throw new Exception("Vectors must be the same size!");     
 
-            var args = new List<Complex>();
+            var result = (a as Matrix) + (b as Matrix);
 
-            for (int i = 0; i < a.Complex.Count(); i++)
-            {
-                args.Add(a.Complex[i]+b.Complex[i]);
-            }
-
-            return new Vector(args);
+            return new Vector(result);
         }
 
         /// <summary>
@@ -48,47 +53,41 @@ namespace QuantumAlgorithms.DataModels
         /// </summary>
         public static Vector operator - (Vector a, Vector b)
         {
-            if (a.Complex.Count() != b.Complex.Count())
+            if (a.N != b.N)
                 throw new Exception("Vectors must be the same size!");
 
-            var args = new List<Complex>();
+            var result = (a as Matrix) - (b as Matrix);
 
-            for (int i = 0; i < a.Complex.Count(); i++)
-            {
-                args.Add(a.Complex[i] - b.Complex[i]);
-            }
-
-            return new Vector(args);
+            return new Vector(result);
         }
 
         /// <summary>
         /// Scalar multiplication of two <see cref="Vector"/>s.
         /// </summary>        
         public static Vector operator * (Complex scalar, Vector vector)
-        {        
-            var args = new List<Complex>();
+        {
+            
 
-            for (int i = 0; i < vector.Complex.Count(); i++)
-            {
-                args.Add(vector.Complex[i] * scalar );
-            }
+            var result = scalar * (vector as Matrix);
 
-            return new Vector(args);
+            return new Vector(result);
         }
+
+
 
         /// <summary>
         /// Multiplies two <see cref="Vector"/>s.
         /// </summary>
         public static Complex operator | (Vector a, Vector b)
         {
-            if (a.Complex.Count != b.Complex.Count)
+            if (a.N != b.N)
                 throw new Exception("Vectors must be the same size!");
 
             var result = new Complex(0,0);
 
-            for (int i = 0; i < a.Complex.Count; i++)
+            for (int i = 0; i < a.N; i++)
             {
-                result += a.Complex[i]* b.Complex[i].Conjugate;
+                result += a[i,0] * b[i,0].Conjugate;
             }
             return result;
         }
@@ -98,17 +97,12 @@ namespace QuantumAlgorithms.DataModels
         /// </summary>
         public static bool operator == (Vector a, Vector b)
         {
-            if (a.Complex.Count != b.Complex.Count)
+            if (a.N != b.N)
                 return false;
 
-            var result = true;
+            
 
-            for (int i = 0; i < a.Complex.Count; i++)
-            {
-                result &= a.Complex[i] == b.Complex[i];
-            }
-
-            return result;
+            return (Matrix)a == (Matrix)b;
         }
 
         /// <summary>
@@ -137,9 +131,7 @@ namespace QuantumAlgorithms.DataModels
 
         public bool Equals(Vector other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return Equals(Complex, other.Complex);
+            throw new NotImplementedException();
         }
 
         public override bool Equals(object obj)
@@ -152,7 +144,7 @@ namespace QuantumAlgorithms.DataModels
 
         public override int GetHashCode()
         {
-            return (Complex != null ? Complex.GetHashCode() : 0);
+            throw new NotImplementedException();
         }
 
         #endregion

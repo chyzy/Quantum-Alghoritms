@@ -27,14 +27,14 @@ namespace QuantumAlgorithms.DataModels
 
         public Complex Alpha
         {
-            get { return this.Complex[0];}
-            protected set { Complex[0] = value; }
+            get { return this[0,0];}
+            protected set { this[0,1] = value; }
         }
 
         public Complex Beta
         {
-            get { return this.Complex[1]; }
-            protected set { Complex[1] = value; }
+            get { return this[1,0]; }
+            protected set { this[1,0] = value; }
         }
 
         public Qubit Rotate(double radians)
@@ -46,15 +46,24 @@ namespace QuantumAlgorithms.DataModels
         }
 
         public static Qubit operator | (Qubit qubit, QuantumGate gate)
-        {
-            var gateMatrix = gate.Matrix;
-            var complexMatrix = new Complex[2,1];
-            complexMatrix[0, 0] = qubit.Alpha;
-            complexMatrix[1, 0] = qubit.Beta;
-
-            var matrix = gateMatrix * new Matrix(complexMatrix);
+        {                       
+            var matrix = gate * new Matrix(qubit);
             return new Qubit(matrix[0,0], matrix[1,0]);
 
+        }
+
+        public static Vector operator * (Qubit first, Qubit second)
+        {            
+            var result = new List<Complex>();
+
+            for (int a = 0; a < first.N; a++)
+            {
+                for (int b = 0; b < second.N; b++)
+                {
+                    result.Add(first[a,0] * second[b,0]);
+                }
+            }
+            return new Vector(result);
         }
 
         public override string ToString()

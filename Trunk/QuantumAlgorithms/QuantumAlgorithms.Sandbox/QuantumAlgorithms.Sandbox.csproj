@@ -54,6 +54,10 @@
       <Project>{6e3f9853-6709-437a-98c5-d5a0aaf44d1c}</Project>
       <Name>QuantumAlgorithms.DataModels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\QuantumAlgorithms.Tools\QuantumAlgorithms.Tools.csproj">
+      <Project>{7f264dd3-db75-4f83-9e09-b2b09d76b0a7}</Project>
+      <Name>QuantumAlgorithms.Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
