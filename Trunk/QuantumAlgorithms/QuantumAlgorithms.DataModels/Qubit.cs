@@ -45,6 +45,14 @@ namespace QuantumAlgorithms.DataModels
             return new Qubit(alpha, beta);
         }
 
+        public bool Measure()
+        {
+            var random = new Random();
+            var probablitity = this.Alpha * this.Alpha;
+
+            return random.NextDouble() >= probablitity.Real;
+        }
+
         public static Qubit operator | (Qubit qubit, QuantumGate gate)
         {                       
             var matrix = gate * new Matrix(qubit);
