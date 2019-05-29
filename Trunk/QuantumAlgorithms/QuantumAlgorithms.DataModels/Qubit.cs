@@ -14,12 +14,14 @@ namespace QuantumAlgorithms.DataModels
             
         }
 
+        private static Random _random;
+
         public static Qubit Random()
-        {
-            var random  = new Random();
+        {           
+            if(_random == null)
+                _random = new Random();
 
-            var alpha = random.NextDouble();
-
+            var alpha = _random.NextDouble();
             var beta = Math.Sqrt(1 - Math.Pow(alpha,2));
 
             return new Qubit(alpha,beta);

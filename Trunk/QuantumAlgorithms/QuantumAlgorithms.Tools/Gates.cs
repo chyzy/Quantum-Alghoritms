@@ -61,17 +61,32 @@ namespace QuantumAlgorithms.Tools
             }
         }
 
-        public static QuantumGate T
+        public static QuantumGate CNOT
         {
             get
             {
                 var matrix = new Complex[,]
                 {
-                    {1, 0 },
-                    {0, new Complex(Math.E,0)^new Complex(0,Math.PI/4),  }
+                    {1, 0,0, 0},
+                    {0, 1, 0, 0},
+                    {0, 0, 0, 1},
+                    {0, 0, 1, 0},
                 };
                 return new QuantumGate(matrix);
             }
         }
+
+        //public static QuantumGate T
+        //{
+        //    get
+        //    {
+        //        var matrix = new Complex[,]
+        //        {
+        //            {1, 0 },
+        //            {0, new Complex(Math.E,0)^new Complex(0,Math.PI/4),  }
+        //        };
+        //        return new QuantumGate(matrix);
+        //    }
+        //}
     }
 }
