@@ -178,6 +178,23 @@ namespace QuantumAlgorithms.DataModels
             return result;
         }
 
+        public static Matrix Kroncker (Matrix m1, Matrix m2)
+        {
+            var result = new Complex[m1.N*m2.N,1];
+
+            var counter = 0;
+
+            for (int i = 0; i < m1.N; i++)
+            {
+                for (int j = 0; j < m2.N; j++)
+                {
+                    result[counter, 0] = m1[i, 0] * m2[j, 0];
+                    counter++;
+                }
+            }
+            return new Matrix(result);
+        }
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
